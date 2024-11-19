@@ -1,0 +1,445 @@
+---
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  MIT No Attribution
+
+  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this
+  software and associated documentation files (the "Software"), to deal in the Software
+  without restriction, including without limitation the rights to use, copy, modify,
+  merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+  permit persons to whom the Software is furnished to do so.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Parameters:
+  LatestAmiId:
+    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2
+
+Resources:
+  #EC2 Workload for more detailed use cases
+  #Network Resources 
+  vpcec2:
+    Type: AWS::EC2::VPC
+    Metadata:
+      cfn_nag:
+        rules_to_suppress:
+          - id: W60
+            reason: "Flowlogs not required for this workshop"
+    Properties:
+      CidrBlock: 10.1.0.0/16
+      Tags:
+        - Key: Name
+          Value: tagworkshopvpcec2
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+  igvpcec2:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  igattvpcec2:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties: 
+      InternetGatewayId: !Ref igvpcec2
+      VpcId: !Ref vpcec2
+  pubsub1vpcec2:
+    Type: AWS::EC2::Subnet
+    Properties: 
+      AvailabilityZone: !Select
+        - '0'
+        - !GetAZs ''
+      CidrBlock: 10.1.0.0/18
+      VpcId: !Ref vpcec2
+      Tags:
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  pubsub2vpcec2:
+    Type: AWS::EC2::Subnet
+    Properties: 
+      AvailabilityZone: !Select
+        - '1'
+        - !GetAZs ''
+      CidrBlock: 10.1.64.0/18
+      VpcId: !Ref vpcec2
+      Tags:
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  privsub1vpcec2:
+    Type: AWS::EC2::Subnet
+    Properties: 
+      AvailabilityZone: !Select
+        - '0'
+        - !GetAZs ''
+      CidrBlock: 10.1.128.0/18
+      VpcId: !Ref vpcec2
+  privsub2vpcec2:
+    Type: AWS::EC2::Subnet
+    Properties: 
+      AvailabilityZone: !Select
+        - '1'
+        - !GetAZs ''
+      CidrBlock: 10.1.192.0/18
+      VpcId: !Ref vpcec2
+      Tags:
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  eip1vpcec2:
+    Type: 'AWS::EC2::EIP'
+  eip2vpcec2:
+    Type: 'AWS::EC2::EIP'
+  natg1vpcec2:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt eip1vpcec2.AllocationId
+      SubnetId: !Ref pubsub1vpcec2
+      Tags:
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  natg2vpcec2:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt eip2vpcec2.AllocationId
+      SubnetId: !Ref pubsub2vpcec2
+      Tags:
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  pubroutetab1vpcec2:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref vpcec2
+      Tags:
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  pubroutetab2vpcec2:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref vpcec2
+      Tags:
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  privroutetab1vpcec2:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref vpcec2
+      Tags:
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  privroutetab2vpcec2:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref vpcec2
+      Tags:
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  pubrouteassoc1vpcec2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref pubroutetab1vpcec2
+      SubnetId: !Ref pubsub1vpcec2
+  pubrouteassoc2vpcec2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref pubroutetab2vpcec2
+      SubnetId: !Ref pubsub2vpcec2
+  privrouteassoc1vpcec2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref privroutetab1vpcec2
+      SubnetId: !Ref privsub1vpcec2
+  privrouteassoc2vpcec2:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref privroutetab2vpcec2
+      SubnetId: !Ref privsub2vpcec2
+  pubroute1vpcec2:
+    Type: AWS::EC2::Route
+    DependsOn: igattvpcec2
+    Properties:
+      DestinationCidrBlock: '0.0.0.0/0'
+      RouteTableId: !Ref pubroutetab1vpcec2
+      GatewayId: !Ref igvpcec2
+  pubroute2vpcec2:
+    Type: AWS::EC2::Route
+    DependsOn: igattvpcec2
+    Properties:
+      DestinationCidrBlock: '0.0.0.0/0'
+      RouteTableId: !Ref pubroutetab2vpcec2
+      GatewayId: !Ref igvpcec2
+  privroute1vpcec2:
+    Type: AWS::EC2::Route
+    Properties:
+      DestinationCidrBlock: '0.0.0.0/0'
+      RouteTableId: !Ref privroutetab1vpcec2
+      NatGatewayId: !Ref natg1vpcec2
+  privroute2vpcec2:
+    Type: AWS::EC2::Route
+    Properties:
+      DestinationCidrBlock: '0.0.0.0/0'
+      RouteTableId: !Ref privroutetab2vpcec2
+      NatGatewayId: !Ref natg2vpcec2
+  InstanceSecurityGroup:
+    Type: 'AWS::EC2::SecurityGroup'
+    Metadata:
+      cfn_nag:
+        rules_to_suppress:
+          - id: W5
+            reason: "All outbound traffic is allowed for workshop purposes"
+          - id: W29
+            reason: "All outbound traffic is allowed for workshop purposes"
+    Properties:
+      GroupDescription: >-
+        Instance associated security group
+      VpcId: !Ref vpcec2
+      Tags:
+        - Key: component
+          Value: network
+        - Key: resource
+          Value: dedicated
+        - Key: owner
+          Value: workshop
+  SecurityGroupEgress:
+    Type: AWS::EC2::SecurityGroupEgress
+    Properties:
+      Description: >-
+        Allow all outbound TCP connections
+      IpProtocol: tcp
+      FromPort: 0
+      ToPort: 65535
+      CidrIp: 0.0.0.0/0
+      GroupId: !Ref InstanceSecurityGroup
+
+  # EC2 AutoScaling Web
+  # LaunchConfig:
+  #   Type: 'AWS::AutoScaling::LaunchConfiguration'
+  #   Properties:
+  #     ImageId: !Ref LatestAmiId
+  #     IamInstanceProfile: !Ref EC2InstanceProfile
+  #     InstanceType: 't3.micro'
+  #     SecurityGroups:
+  #       - !Ref InstanceSecurityGroup
+  #     UserData:
+  #       Fn::Base64:
+  #         #!/bin/bash
+  #         yum update -y
+  # AutoScalingGroup:
+  #   Type: 'AWS::AutoScaling::AutoScalingGroup'
+  #   Properties:
+  #     VPCZoneIdentifier:
+  #       - !Ref pubsub1vpcec2
+  #       - !Ref pubsub2vpcec2
+  #     LaunchConfigurationName: !Ref LaunchConfig
+  #     MinSize: '2'
+  #     MaxSize: '2'
+  #     Tags:
+  #       - Key: component
+  #         Value: compute
+  #         PropagateAtLaunch: true
+  #       - Key: Name
+  #         Value: webserver
+  #         PropagateAtLaunch: true
+  #       - Key: os
+  #         Value: al2
+  #         PropagateAtLaunch: true
+  #       - Key: tier
+  #         Value: web
+  #         PropagateAtLaunch: true
+  #       - Key: resource
+  #         Value: dedicated
+  #         PropagateAtLaunch: true
+  #       - Key: owner
+  #         Value: workshop
+  #         PropagateAtLaunch: true
+  #       - Key: costcenter
+  #         Value: B001
+  #         PropagateAtLaunch: true
+  #       - Key: team
+  #         Value: webteam
+  #         PropagateAtLaunch: true
+  # EC2 AutoScaling Web
+  LaunchConfig:
+    Type: 'AWS::EC2::LaunchTemplate'
+    Properties:
+      LaunchTemplateData:
+        ImageId: !Ref LatestAmiId
+        IamInstanceProfile:
+          Name: !Ref EC2InstanceProfile
+        InstanceType: 't3.micro'
+        SecurityGroupIds:
+          - !GetAtt InstanceSecurityGroup.GroupId
+        UserData:
+          Fn::Base64:
+            #!/bin/bash
+            yum update -y
+  AutoScalingGroup:
+    Type: 'AWS::AutoScaling::AutoScalingGroup'
+    Properties:
+      VPCZoneIdentifier:
+        - !Ref pubsub1vpcec2
+        - !Ref pubsub2vpcec2
+      LaunchTemplate:
+        LaunchTemplateId: !Ref LaunchConfig
+        Version: !GetAtt LaunchConfig.LatestVersionNumber 
+      MinSize: '2'
+      MaxSize: '2'
+      Tags:
+        - Key: component
+          Value: compute
+          PropagateAtLaunch: true
+        - Key: Name
+          Value: webserver
+          PropagateAtLaunch: true
+        - Key: os
+          Value: al2
+          PropagateAtLaunch: true
+        - Key: tier
+          Value: web
+          PropagateAtLaunch: true
+        - Key: resource
+          Value: dedicated
+          PropagateAtLaunch: true
+        - Key: owner
+          Value: workshop
+          PropagateAtLaunch: true
+        - Key: costcenter
+          Value: B001
+          PropagateAtLaunch: true
+        - Key: team
+          Value: webteam
+          PropagateAtLaunch: true
+  
+  EC2InstanceRole:
+    # Must be manually deleted before performing CFN Stack deletion
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+  EC2InstanceProfile:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      Roles:
+        - !Ref EC2InstanceRole
+  # EC2 AutoScaling App
+  # LaunchConfigapp:
+  #   Type: 'AWS::AutoScaling::LaunchConfiguration'
+  #   Properties:
+  #     ImageId: !Ref LatestAmiId
+  #     IamInstanceProfile: !Ref EC2InstanceProfileapp
+  #     InstanceType: 't3.micro'
+  #     SecurityGroups:
+  #       - !Ref InstanceSecurityGroup
+  #     UserData:
+  #       Fn::Base64:
+  #         #!/bin/bash
+  #         yum update -y
+
+  # EC2 AutoScaling App
+  LaunchConfigapp:
+    Type: 'AWS::EC2::LaunchTemplate'
+    Properties:
+      LaunchTemplateData:
+        ImageId: !Ref LatestAmiId
+        IamInstanceProfile:
+          Name: !Ref EC2InstanceProfileapp
+        InstanceType: 't3.micro'
+        SecurityGroupIds:
+          - !GetAtt InstanceSecurityGroup.GroupId
+        UserData:
+          Fn::Base64:
+            #!/bin/bash
+            yum update -y
+  AutoScalingGroupapp:
+    Type: 'AWS::AutoScaling::AutoScalingGroup'
+    Properties:
+      VPCZoneIdentifier:
+        - !Ref privsub1vpcec2
+        - !Ref privsub2vpcec2
+      #LaunchConfigurationName: !Ref LaunchConfigapp
+      LaunchTemplate:
+        LaunchTemplateId: !Ref LaunchConfigapp
+        Version: !GetAtt LaunchConfigapp.LatestVersionNumber 
+      MinSize: '2'
+      MaxSize: '2'
+      Tags:
+        - Key: component
+          Value: compute
+          PropagateAtLaunch: true
+        - Key: Name
+          Value: appserver
+          PropagateAtLaunch: true
+        - Key: os
+          Value: al2
+          PropagateAtLaunch: true
+        - Key: resource
+          Value: dedicated
+          PropagateAtLaunch: true
+        - Key: owner
+          Value: workshop
+          PropagateAtLaunch: true
+  EC2InstanceProfileapp:
+    Type: 'AWS::IAM::InstanceProfile'
+    Properties:
+      Roles:
+        - !Ref EC2InstanceRole
+
+Outputs:
+     vpcec2id:
+       Value: !Ref vpcec2
+     
