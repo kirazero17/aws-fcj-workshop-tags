@@ -5,4 +5,4 @@ chapter: false
 pre: "<b> 3. </b>"
 ---
 
-![](../../../images/1/work.bmp)
+![](../../images/1/work.bmp)

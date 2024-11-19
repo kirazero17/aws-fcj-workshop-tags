@@ -10,4 +10,4 @@ Stack đang được chỉnh sửa và Cloud9 đang được thay thế
 
 Tải stack cũ tại [đây](../../workload/tagging-workload.yaml).
 
-![](../../../images/1/work.bmp)
+![](../../images/1/work.bmp)
