@@ -19,6 +19,9 @@ Có những yêu cầu sử dụng và giới hạn về số lượng thẻ do 
 Mục tiêu của workshop này là hướng dẫn bạn những cách khác nhau để gắn thẻ tài nguyên AWS và truy vấn các thẻ đó. Sau khi workshop kết thúc, bạn sẽ hiểu cách gắn thẻ và quản lý các thẻ của các tài nguyên AWS khác nhau.
 
 ### Kiến trúc hạ tầng workshop
+
+Hệ thống hạ tầng của workshop bao gồm 1 VPC chứa 2 subnet, 1 public và 1 private. Trong mỗi subnet đặt một EC2 AutoScaling Group. Public subnet có thể giao tiếp với thế giới bên ngoài qua Internet Gateway. Để đảm bảo chỉ có thể yêu cầu từ bên trong private subnet, nhưng không thể yêu cầu từ bên ngoài vào subnet này, một NAT Gateway được đặt trong public và mọi lưu lượng vào và ra public subnet phải đi qua NAT Gateway.
+
 ![arch](../images/0-home/0001-architecture.png)
 
 ### Cấu trúc nội dung

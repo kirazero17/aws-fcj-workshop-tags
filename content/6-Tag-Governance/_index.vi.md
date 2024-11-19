@@ -1,8 +1,8 @@
 ---
 title: "Đang thi công"
-weight: 4
+weight: 6
 chapter: false
-pre: "<b> 4. </b>"
+pre: "<b> 6. </b>"
 ---
 
 ![](../../images/1/work.bmp)

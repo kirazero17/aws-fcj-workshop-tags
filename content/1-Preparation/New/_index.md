@@ -2,7 +2,7 @@
 title: "Prepare for this workshop (New)"
 weight: 1
 chapter: false
-pre: "<b> 1. </b>"
+pre: "<b> 1.1 </b>"
 ---
 
 ### Hold up !

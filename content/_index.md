@@ -19,6 +19,9 @@ There are usage requirements and limits on the number of user-defined tags that 
 The goal of this workshop is to walk through the various ways in which you can tag AWS resources & query said tags. By the end of this workshop you would have an understanding on how to tag, and govern the tags of different AWS resources.
 
 ### Infrastructure architecture
+
+The infrastructure consists of one VPC, with one public and one private subnet created inside. One EC2 AutoScaling Group is created in each subnet. The public subnet can communicate with the world through an internet gateway. To make sure only outbound traffics from the private subnet are allowed, a NAT Gateway is placed in the public subnet. All private outbound traffics are routed to it.
+
 ![arch](images/0-home/0001-architecture.png)
 
 ### Workshop Structures
