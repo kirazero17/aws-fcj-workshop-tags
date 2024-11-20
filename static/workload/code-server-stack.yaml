@@ -36,6 +36,10 @@ Parameters:
     Type: String
     Description: VPC CIDR Block
     Default: 10.0.0.0/24
+  SubnetCidrBlock:
+    Type: String
+    Description: VPC CIDR Block
+    Default: 10.0.0.0/25
   VSCodeServerVersion:
     Type: String
     Description: VSCodeServerVersion
@@ -60,7 +64,7 @@ Resources:
   PublicSubnet:
     Type: AWS::EC2::Subnet
     Properties:
-      CidrBlock: 10.0.0.0/24
+      CidrBlock: !Ref SubnetCidrBlock
       VpcId: !Ref VPC
       MapPublicIpOnLaunch: true
       AvailabilityZone: !Select [0, !GetAZs ""]
@@ -98,7 +102,9 @@ Resources:
           - VSCodeServerSecurityGroup
           - GroupId
       IpProtocol: tcp
+      FromPort: 8080
       ToPort: 8080
+      CidrIp: 0.0.0.0/0
 
   VSCodeServerSecurityGroupEgress:
     Type: AWS::EC2::SecurityGroupEgress
@@ -160,7 +166,6 @@ Resources:
               #!/bin/bash
               curl -fOL https://github.com/coder/code-server/releases/download/v${VERSION}/code-server_${VERSION}_amd64.deb
               sudo dpkg -i code-server_${VERSION}_amd64.deb
-              export PASSWORD="yourpassword"
               sudo systemctl enable --now code-server@ubuntu
               sleep 30
               sed -i.bak 's/auth: password/auth: none/' /home/ubuntu/.config/code-server/config.yaml
@@ -175,7 +180,7 @@ Outputs:
   VSCodeServerCloudFrontDomainName:
     Value: 
       !Sub 
-        - "https://${domain}:8080"
+        - "http://${domain}:8080"
         - { domain: !GetAtt VSCodeServer.PublicDnsName }
     Export:
       Name: !Sub ${AWS::StackName}-public-domain-name

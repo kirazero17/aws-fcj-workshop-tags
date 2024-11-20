@@ -5,14 +5,13 @@ chapter: false
 pre: "<b> 1.1 </b>"
 ---
 
-### Pre-note !
-The stack is being fixed and the Cloud9 is being replaced as it is deprecated.
-
-![](../../images/1/work.bmp)
+{{% notice info %}}
+As Cloud9 is being deprecated, we suggest you use this instruction to set your environment up instead.
+{{% /notice %}}
 
 ### Deploy The Template
 
-1. Download the [tagging-workload.yaml](../workload/tagging-workload.yaml) CloudFormation template to your local machine.
+1. Download the [tagging-workload.yaml](../../workload/tagging-workload.yaml) CloudFormation template to your local machine.
 
 1. Navigate to the [CloudFormation console](https://console.aws.amazon.com/cloudformation/home) and choose Create Stack > With new resources (standard).
 
@@ -28,31 +27,32 @@ The stack is being fixed and the Cloud9 is being replaced as it is deprecated.
 
 1. Choose **Next** till you get to the Review page and choose Submit. Wait for the stack creation to reach CREATE_COMPLETE once completed move on to the workshop labs.
 
-1. Repeat steps 1-6 with the AWS Cloud9 stack [cloud9_nonws.yaml](../workload/cloud9_nonws.yaml). Enter `cloud9` for the Stack name.
+1. Repeat steps 1-6 with the VSCode Server stack [code-server-stack.yaml](../../workload/code-server-stack.yaml). Enter `vscodeserver` for the Stack name.
 
-### AWS Cloud9 Access
+### VSCode Server Access
 
 1. Navigate to the [CloudFormation console](https://console.aws.amazon.com/cloudformation/home).
 
-1. Choose the `cloud9-nonws` stack and then choose the Outputs tab.
+1. Choose the _VSCode IDE Server_ stack and then choose the **Outputs** tab.
 
-1. The Output key will be **Cloud9DevEnvUrl**
+1. The Output key will be **VSCodeServerCloudFrontDomainName**
 
 1. Open the URL Value in a new browser tab, this will open up the AWS Cloud9 environment to be used in the following labs.
 
-![](../../images/1/old/003-cf_cloud9.png)
+![](../../images/1/new/001.png)
 
 You will now see the created AWS Cloud9 environment in a new tab.
 
-![](../../images/1/old/004-cloud9_welcome.png)
+![](../../images/1/new/002.png)
 
 ### AWS Config
 
 For the AWS Config labs you will need a configuration recorder enabled in your account. If AWS Config is setup in your account already, you can move onto the labs. If AWS Config is not setup in your account already, complete the following instructions, or, skip the config labs if you do not wish to enable AWS Config in your own account.
 
-1. Log into your AWS Cloud9 environment and access the environment directory.
+1. Log into your AWS Cloud9 environment, then create ands access the environment directory.
 
 ```bash
+mkdir ~/environment
 cd ~/environment
 mkdir config
 cd config
