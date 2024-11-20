@@ -39,7 +39,7 @@ If you still wish to use Cloud9, you can [go back](../).
 
 1. The Output key will be **VSCodeServerCloudFrontDomainName**
 
-1. Open the URL Value in a new browser tab, this will open up the AWS Cloud9 environment to be used in the following labs.
+1. Open the URL Value in a new browser tab, this will open up the VSCode Server environment to be used in the following labs.
 
 ![](../../images/1/new/001.jpg)
 
@@ -51,7 +51,7 @@ You will now see the created VSCode Server environment in a new tab.
 
 For the AWS Config labs you will need a configuration recorder enabled in your account. If AWS Config is setup in your account already, you can move onto the labs. If AWS Config is not setup in your account already, complete the following instructions, or, skip the config labs if you do not wish to enable AWS Config in your own account.
 
-1. Log into your AWS Cloud9 environment, then create ands access the environment directory.
+1. Log into your VSCode Server environment, then create ands access the environment directory.
 
 ```bash
 mkdir ~/environment
