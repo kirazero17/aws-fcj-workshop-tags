@@ -41,11 +41,11 @@ If you still wish to use Cloud9, you can [go back](../).
 
 1. Open the URL Value in a new browser tab, this will open up the AWS Cloud9 environment to be used in the following labs.
 
-![](../../images/1/new/001.png)
+![](../../images/1/new/001.jpg)
 
 You will now see the created AWS Cloud9 environment in a new tab.
 
-![](../../images/1/new/002.png)
+![](../../images/1/new/002.jpg)
 
 ### AWS Config
 
