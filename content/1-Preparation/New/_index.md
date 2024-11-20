@@ -6,7 +6,9 @@ pre: "<b> 1.1 </b>"
 ---
 
 {{% notice info %}}
-As Cloud9 is being deprecated, we suggest you use this instruction to set your environment up instead.
+As Cloud9 is being deprecated, we suggest you use this instruction to set your environment up instead.\
+\
+If you still wish to use Cloud9, you can [go back](../).
 {{% /notice %}}
 
 ### Deploy The Template
