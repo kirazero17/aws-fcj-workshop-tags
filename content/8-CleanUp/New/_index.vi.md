@@ -1,8 +1,8 @@
 ---
 title: "Dọn dẹp - Bản mới"
-weight: 2
+weight: 1
 chapter: false
-pre: "<b> 8.2 </b>"
+pre: "<b> 8.1 </b>"
 ---
 
 ### Khoan đã !
