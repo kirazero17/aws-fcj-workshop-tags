@@ -5,10 +5,9 @@ chapter: false
 pre: "<b> 1. </b>"
 ---
 
-### Hold up !
-The stack is being fixed and the Cloud9 is being replaced
-
-[Download the old stack](../workload/tagging-workload.yaml).
+{{% notice info %}}
+As Cloud9 is being deprecated, we suggest you move to the [newer version of this section](./New/), especially if your account is created after July 24, 2024.
+{{% /notice %}}
 
 ### Deploy The Template
 

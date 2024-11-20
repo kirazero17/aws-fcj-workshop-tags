@@ -23,7 +23,7 @@ In these labs we will walk through a number of stages:
 
 ### AWS CodeCommit repository creation
 
-To create the CodeCommit repository, run the following command in the AWS Cloud9 terminal:
+To create the CodeCommit repository, run the following command in the AWS Cloud9/VSCode Server terminal:
 
     ```bash
     cd ~/environment/
@@ -34,9 +34,9 @@ To create the CodeCommit repository, run the following command in the AWS Cloud9
 
     ![](../../images/5/1/001.png)
 
-### Clone the repository into the AWS Cloud9 environment
+### Clone the repository into the AWS Cloud9/VSCode Server environment
 
-Clone your repository into your AWS Cloud9 environment so that you can easily push up your changes. Change the below command to meet your region requirments and run in the terminal:
+Clone your repository into your AWS Cloud9/VSCode Server environment so that you can easily push up your changes. Change the below command to meet your region requirments and run in the terminal:
 
     ```bash
     git clone https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/cfn-guard-demo && cd cfn-guard-demo && touch buildspec.yml cfn_guard_ruleset_example.guard cfn_template_file_example.yaml && ls -l
@@ -62,7 +62,7 @@ You will now need to populate your repository artifacts.
 
 - cfn_template_file_example.yaml
 
-1. Use the AWS Cloud9 IDE to update the above files. Use the navigation pane to find the folder cfn-guard-demo and open each file. Once opened, modify each file according to the following artifacts. Ensure that you save each file.
+1. Use the AWS Cloud9/VSCode Server IDE to update the above files. Use the navigation pane to find the folder cfn-guard-demo and open each file. Once opened, modify each file according to the following artifacts. Ensure that you save each file.
 
     **a. The `buildspec.yml` file:**
 

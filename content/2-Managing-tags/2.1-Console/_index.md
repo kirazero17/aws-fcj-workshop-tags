@@ -44,15 +44,15 @@ Another tag assigned to the resource is `Name`. This is a predefined tag that ca
 
 ### Managing individual resource tags
 
-1. Select the resource and choose the Tags tab, then choose Manage tags.
+1. Select the resource and choose the **Tags** tab, then choose **Manage tags**.
 
-1. Notice that the tags presented with the option to edit the Name tag are only the user-defined tags.
+1. Notice that the tags presented with the option to edit the **Name** tag are only the user-defined tags.
 
-1. Choose Add new tag.
+1. Choose **Add new tag**.
 
-1. Enter the key:value for the tag. In this case, enter environment:dev.
+1. Enter the key:value for the tag. In this case, enter `environment:dev`.
 
-1. Choose Add new tag again for each additional tag to add. When you are finished adding tags, choose Save.
+1. Choose **Add new tag** again for each additional tag to add. When you are finished adding tags, choose Save.
 
 ![Add tag](../../images/2/1/002-vpc_new_tag.png)
 

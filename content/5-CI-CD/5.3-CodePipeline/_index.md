@@ -15,7 +15,7 @@ The CI/CD pipeline needs two AWS Identity and Access Management (IAM) roles to r
 
 For this section you will create a CloudFormation stack to build your IAM resources. See IAM Documentation for more information on IAM.
 
-1. In your AWS Cloud9 environment, runn the following commands in the terminal to pull down the CloudFormation YAML file into a newly created directory:
+1. In your AWS Cloud9/VSCode Server environment, runn the following commands in the terminal to pull down the CloudFormation YAML file into a newly created directory:
 
     ```bash
     cd ~/environment

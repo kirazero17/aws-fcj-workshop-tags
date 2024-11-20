@@ -12,8 +12,8 @@ Guard doesn't validate CloudFormation templates for valid syntax or allowed prop
 
 For full details on the options of CloudFormation Guard and example use cases outside of tagging, see the documentation AWS CloudFormation Guard 
 
-### Install Guard in the AWS Cloud9 environment
-1. Open the AWS Cloud9 terminal, and run the following commands.
+### Install Guard in your Dev environment
+1. Open the AWS Cloud9/VSCode Server terminal, and run the following commands.
 
     ```bash
     curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/aws-cloudformation/cloudformation-guard/main/install-guard.sh | sh
@@ -170,7 +170,7 @@ You can now see that you have a flexible set of rules that can be applied to tag
 ### Test our first Guard test
 Guard gives you the ability to write tests for your rules, to validate that your rules work as you expect.
 
-1. Create a test file for the rules you created earlier by running the following command in the AWS Cloud9 terminal.
+1. Create a test file for the rules you created earlier by running the following command in the AWS Cloud9/VSCode Server terminal.
 
     ```bash
     cd ~/environment/cfnguard

@@ -17,7 +17,7 @@ If our CloudFormation template doesn’t comply with the policies specified in o
 
 1. Review the **Build stage**. Choose **View details** to review the CodeBuild logs. You will be able to see the entire failure reason in the log from the cfn-guard output. After you have finished reviewing the logs, choose **Done**.
 
-1. Now you will correct the tag in the AWS Cloud9 IDE. Open the `cfn_template_file_example.yaml` file and add the below with the correct values. After you have finished editing the file, ensure you save the file after making the update:
+1. Now you will correct the tag in the AWS Cloud9/VSCode Server IDE. Open the `cfn_template_file_example.yaml` file and add the below with the correct values. After you have finished editing the file, ensure you save the file after making the update:
 
     ```yaml
     Resources:
@@ -40,7 +40,7 @@ If our CloudFormation template doesn’t comply with the policies specified in o
             Value: "myservice"
     ```
 
-1. You will now push the changes to the CodeCommit repository by running the following commands in the AWS Cloud9 terminal:
+1. You will now push the changes to the CodeCommit repository by running the following commands in the AWS Cloud9/VSCode Server terminal:
 
     ```bash
     cd ~/environment/cfn-guard-demo/

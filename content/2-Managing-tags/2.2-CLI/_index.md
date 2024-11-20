@@ -29,9 +29,9 @@ Instructions for configuring the AWS CLI can be found in the [AWS CLI documentat
 
 ### Select the Amazon VPC
 
-Run the following command in the AWS Cloud9 terminal after making the following edits:
+Run the following command in the AWS Cloud9/VSCode Server terminal after making the following edits:
 
-- a. Enter value of the Amazon VPC ID from the previous step in the place of `"VPC-ID"`
+- a. Enter value of the **Amazon VPC ID** from the previous step in the place of `"VPC-ID"`
 
 - b. Enter the name of your region, such as `eu-west-1`, in the place of `"REGION"`
 

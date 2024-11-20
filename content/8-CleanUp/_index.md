@@ -9,19 +9,19 @@ pre: "<b> 8. </b>"
 
 1. Navigate to the Cloudformation console .
 
-1. Choose the tagging-workload stack you created at the beggining of the workshop.
+1. Choose the `tagging-workload` stack you created at the beggining of the workshop.
 
-1. Choose Delete and confirm.
+1. Choose **Delete** and confirm.
 
 ![](../images/8/001.png)
 
-### Cleanup AWS Cloud9 Resources
+### Cleanup AWS Cloud9/VSCode Server Resources
 
 1. Navigate to the Cloudformation console .
 
-1. Choose the cloud9 stack you created at the beggining of the workshop.
+1. Choose the cloud9 (or VSCode Server) stack you created at the beggining of the workshop.
 
-1. Choose Delete and confirm.
+1. Choose **Delete** and confirm.
 
 ![](../images/8/002.png)
 
@@ -35,7 +35,7 @@ pre: "<b> 8. </b>"
 
 1. Choose the config stack you created at the beggining of the workshop.
 
-1. Choose Delete and confirm.
+1. Choose **Delete** and confirm.
 
 ![](../images/8/003.png)
 

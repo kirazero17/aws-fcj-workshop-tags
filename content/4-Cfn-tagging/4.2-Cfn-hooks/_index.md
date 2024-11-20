@@ -10,15 +10,15 @@ Hooks proactively inspect the configuration of your AWS resources before provisi
 
 For this lab you will use a hook example from the [aws-cloudformation](https://github.com/aws-cloudformation) github repository.
 
-### Install CloudFormation Hooks in the AWS Cloud9 environment
+### Install CloudFormation Hooks in your Dev environment
 
-1. Open the AWS Cloud9 terminal and run the following commands to install the Cloudformation CLI and plugins.
+1. Open the AWS Cloud9/VSCode Server terminal and run the following commands to install the Cloudformation CLI and plugins.
 
     ```bash
     pip install cloudformation-cli cloudformation-cli-java-plugin cloudformation-cli-go-plugin cloudformation-cli-python-plugin cloudformation-cli-typescript-plugin
     ```
 
-1. You will use a pre-created hook for this lab. Run the following command in the terminal to create a folder called resource-tags in our AWS Cloud9 environment. This may take a few minutes to complete.
+1. You will use a pre-created hook for this lab. Run the following command in the terminal to create a folder called resource-tags in our AWS Cloud9/VSCode Server environment. This may take a few minutes to complete.
 
     ```bash
     cd ~/environment
