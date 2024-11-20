@@ -10,4 +10,4 @@ The stack is being fixed and the Cloud9 is being replaced as it is deprecated.
 
 [Download the old stack](../workload/tagging-workload.yaml).
 
-![](../../../images/1/work.bmp)
+![](../../images/1/work.bmp)
