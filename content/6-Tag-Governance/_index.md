@@ -11,8 +11,8 @@ AWS Config  is a fully managed service that provides you with resource inventory
 
 ### What's in this section ?
 
-- [AWS Config Required Tags](./6.1-Required-Tags)
+1. [AWS Config Required Tags](./6.1-Required-Tags)
 
-- [AWS Config Advanced Queries](./6.2-Advanced-Query)
+1. [AWS Config Advanced Queries](./6.2-Advanced-Query)
 
-- [AWS Config Cleanup](./6.3-Cleanup)
+1. [AWS Config Cleanup](./6.3-Cleanup)
