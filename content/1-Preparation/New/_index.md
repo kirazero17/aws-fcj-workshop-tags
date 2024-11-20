@@ -43,7 +43,7 @@ If you still wish to use Cloud9, you can [go back](../).
 
 ![](../../images/1/new/001.jpg)
 
-You will now see the created AWS Cloud9 environment in a new tab.
+You will now see the created VSCode Server environment in a new tab.
 
 ![](../../images/1/new/002.jpg)
 
