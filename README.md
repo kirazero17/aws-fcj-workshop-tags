@@ -1,3 +1,3 @@
-# AWS Workshop Template - Cloud Journey/AWS Study Group
+# AWS FCJ Workshop - Tags and Tagging
 
-As it was...
+Version 0.9-alpha
